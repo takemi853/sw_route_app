@@ -12,11 +12,11 @@ export type Era = {
 
 export const ERAS: Era[] = [
   { id: "high_republic", labelJa: "ハイ・リパブリック時代", timelineRange: "BBY 400〜100", color: "#7c3aed" },
-  { id: "prequel",       labelJa: "プリクエル時代",         timelineRange: "BBY 100〜19",  color: "#1d4ed8" },
+  { id: "prequel",       labelJa: "ジェダイの没落",           timelineRange: "BBY 100〜19",  color: "#1d4ed8" },
   { id: "imperial",      labelJa: "帝国時代",               timelineRange: "BBY 19〜0",    color: "#b91c1c" },
   { id: "rebellion",     labelJa: "反乱期",                 timelineRange: "BBY 5〜ABY 4", color: "#b45309" },
   { id: "new_republic",  labelJa: "新共和国時代",           timelineRange: "ABY 4〜34",    color: "#15803d" },
-  { id: "sequel",        labelJa: "セクエル時代",           timelineRange: "ABY 34〜35",   color: "#0e7490" },
+  { id: "sequel",        labelJa: "ファースト・オーダーの台頭", timelineRange: "ABY 34〜35",   color: "#0e7490" },
 ];
 
 export type Work = {
