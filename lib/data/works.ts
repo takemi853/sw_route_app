@@ -137,7 +137,7 @@ export const works: Work[] = [
     year: 1983,
     timelineLabel: "ABY 4（エンドアの戦い）",
     synopsis:
-      "ルークと仲間たちが帝国に最後の決戦を挑む。エンドアの戦いで帝国は崩壊し、銀河に新たな時代が始まる。マンダロリアンやアンドーの「帝国崩壊後」の世界はこの物語の直後から始まる。",
+      "ルークと仲間たちが帝国に最後の決戦を挑む。エンドアの戦いで帝国は崩壊し、銀河に新たな時代が始まる。マンダロリアンはこの約5年後の世界を描く。なおアンドーはこれより前、帝国全盛期（EP3〜EP4の間）の物語。",
     posterUrl: "https://image.tmdb.org/t/p/w500/tmQ9HzBvXzYuTP1qwVAoYXQvTU1.jpg",
     themes: ["救済と決別", "帝国の終焉"],
     routeIds: ["mandalorian_route", "rogue_one_andor_route"],
