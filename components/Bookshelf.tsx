@@ -4,8 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { works, type Work } from "@/lib/data/works";
 import WorkDetail from "./WorkDetail";
+import Timeline from "./Timeline";
 
 import type { ReaderProfile } from "@/lib/types";
+
+type Tab = "shelf" | "timeline";
 
 type Props = {
   reader: ReaderProfile;
@@ -15,6 +18,7 @@ type Props = {
 
 export default function Bookshelf({ reader, onOpenRoutes, onBack }: Props) {
   const [selected, setSelected] = useState<Work | null>(null);
+  const [tab, setTab] = useState<Tab>("shelf");
 
   if (selected) {
     return <WorkDetail work={selected} onBack={() => setSelected(null)} />;
@@ -38,12 +42,29 @@ export default function Bookshelf({ reader, onOpenRoutes, onBack }: Props) {
             >
               ← 最初から
             </button>
-            <h1 className="font-bold text-sm" style={{ color: "#1c1917" }}>作品一覧</h1>
+            {/* タブ切替 */}
+            <div
+              className="flex rounded-lg p-0.5 gap-0.5"
+              style={{ background: "#d4cfc6" }}
+            >
+              {(["shelf", "timeline"] as Tab[]).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTab(t)}
+                  className="text-xs px-3 py-1 rounded-md font-semibold transition-colors"
+                  style={{
+                    background: tab === t ? "#f2ede5" : "transparent",
+                    color: tab === t ? "#1c1917" : "#78716c",
+                  }}
+                >
+                  {t === "shelf" ? "一覧" : "時系列"}
+                </button>
+              ))}
+            </div>
           </div>
-          {/* ルートへのCTA */}
           <button
             onClick={onOpenRoutes}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full"
             style={{ background: "#1c1917", color: "#f9fafb" }}
             onMouseOver={(e) => (e.currentTarget.style.background = "#374151")}
             onMouseOut={(e) => (e.currentTarget.style.background = "#1c1917")}
@@ -53,22 +74,26 @@ export default function Bookshelf({ reader, onOpenRoutes, onBack }: Props) {
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-8">
-        {/* ポスターグリッド */}
-        <div className="grid grid-cols-4 gap-2 mb-8">
-          {works.map((work) => (
-            <PosterCard key={work.id} work={work} onClick={() => setSelected(work)} />
-          ))}
-        </div>
+      <main className="max-w-xl mx-auto px-4 py-6">
+        {tab === "shelf" ? (
+          <>
+            {/* ポスターグリッド */}
+            <div className="grid grid-cols-4 gap-2 mb-8">
+              {works.map((work) => (
+                <PosterCard key={work.id} work={work} onClick={() => setSelected(work)} />
+              ))}
+            </div>
+            {/* カード一覧 */}
+            <div className="space-y-3">
+              {works.map((work) => (
+                <WorkCard key={work.id} work={work} onClick={() => setSelected(work)} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <Timeline onSelectWork={setSelected} />
+        )}
 
-        {/* カード一覧 */}
-        <div className="space-y-3">
-          {works.map((work) => (
-            <WorkCard key={work.id} work={work} onClick={() => setSelected(work)} />
-          ))}
-        </div>
-
-        {/* 下部CTA */}
         <button
           onClick={onOpenRoutes}
           className="mt-8 w-full py-3 rounded-xl text-sm font-semibold"
