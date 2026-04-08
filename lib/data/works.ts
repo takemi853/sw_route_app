@@ -27,14 +27,21 @@ export type Work = {
   year: number;
   seasons?: number;
   episodes?: number;
+  /** 1話あたりの分数（映画は総尺） */
+  minutesPerEpisode: number;
   timelineLabel: string;
-  /** 時系列ソート用: BBY=負数、ABY=正数 */
   timelineOrder: number;
   eraId: string;
   synopsis: string;
   posterUrl: string;
   themes: string[];
   routeIds: string[];
+  /** どのルートで必須か（routeIdsのサブセット） */
+  essentialForRoutes?: string[];
+  /** 入門作品としてトップに出す */
+  isEntryPoint?: boolean;
+  /** 入門者向けの一言コピー */
+  entryNote?: string;
   connections?: WorkConnection[];
   spineColor: string;
   labelColor: string;
@@ -61,6 +68,7 @@ export const works: Work[] = [
     connections: [
       { workId: "ep1", relation: "約70年後がEP1" },
     ],
+    minutesPerEpisode: 45,
     spineColor: "#0f0c29",
     labelColor: "#c084fc",
   },
@@ -83,6 +91,7 @@ export const works: Work[] = [
     connections: [
       { workId: "ep2", relation: "直接続く" },
     ],
+    minutesPerEpisode: 136,
     spineColor: "#1a1a2e",
     labelColor: "#e0aaff",
   },
@@ -104,6 +113,7 @@ export const works: Work[] = [
       { workId: "clone_wars", relation: "この直後からクローン大戦が展開" },
       { workId: "ep3", relation: "直接続く" },
     ],
+    minutesPerEpisode: 142,
     spineColor: "#16213e",
     labelColor: "#c8b6e2",
   },
@@ -129,6 +139,7 @@ export const works: Work[] = [
       { workId: "bad_batch", relation: "最終章の直後がバッド・バッチ" },
       { workId: "rebels", relation: "アソーカがRebelでも活躍" },
     ],
+    minutesPerEpisode: 22,
     spineColor: "#1a1a2e",
     labelColor: "#38bdf8",
   },
@@ -151,6 +162,7 @@ export const works: Work[] = [
       { workId: "obi_wan", relation: "10年後がオビ=ワン" },
       { workId: "andor", relation: "この後の帝国時代をアンドーが描く" },
     ],
+    minutesPerEpisode: 140,
     spineColor: "#0d0d0d",
     labelColor: "#ff6b6b",
   },
@@ -176,6 +188,7 @@ export const works: Work[] = [
       { workId: "ep3", relation: "EP3直後から始まる" },
       { workId: "rebels", relation: "一部キャラがRebelに繋がる" },
     ],
+    minutesPerEpisode: 30,
     spineColor: "#1c2840",
     labelColor: "#67e8f9",
   },
@@ -199,6 +212,7 @@ export const works: Work[] = [
       { workId: "clone_wars", relation: "クローン大戦期のアソーカが登場" },
       { workId: "rebels", relation: "Rebelsのアソーカへ繋がる" },
     ],
+    minutesPerEpisode: 14,
     spineColor: "#1a1a1a",
     labelColor: "#fde68a",
   },
@@ -219,6 +233,7 @@ export const works: Work[] = [
     connections: [
       { workId: "ep4", relation: "EP4でハン・ソロとして登場" },
     ],
+    minutesPerEpisode: 135,
     spineColor: "#1c1c1c",
     labelColor: "#d4af37",
   },
@@ -243,6 +258,7 @@ export const works: Work[] = [
       { workId: "andor", relation: "ほぼ同時代（帝国全盛期）" },
       { workId: "ep4", relation: "EP4へ繋がる" },
     ],
+    minutesPerEpisode: 45,
     spineColor: "#1a2744",
     labelColor: "#93c5fd",
   },
@@ -267,6 +283,7 @@ export const works: Work[] = [
       { workId: "rogue_one", relation: "最終章はローグ・ワン直前" },
       { workId: "ahsoka", relation: "エズラ・ブリッジャーがアソーカへ続く" },
     ],
+    minutesPerEpisode: 22,
     spineColor: "#1c2e1c",
     labelColor: "#86efac",
   },
@@ -292,6 +309,10 @@ export const works: Work[] = [
       { workId: "rogue_one", relation: "直接続く（S2の最終章がローグワン直前）" },
       { workId: "rebels", relation: "同時代の別視点" },
     ],
+    minutesPerEpisode: 43,
+    isEntryPoint: true,
+    essentialForRoutes: ["rogue_one_andor_route"],
+    entryNote: "1〜3話で一気に引き込まれる。映画を見たことがなくても大丈夫。",
     spineColor: "#1c3047",
     labelColor: "#e2e8f0",
   },
@@ -313,6 +334,8 @@ export const works: Work[] = [
       { workId: "andor", relation: "アンドーの直後" },
       { workId: "ep4", relation: "EP4の直前（設計図がEP4へ渡る）" },
     ],
+    minutesPerEpisode: 133,
+    essentialForRoutes: ["rogue_one_andor_route"],
     spineColor: "#2d3748",
     labelColor: "#fed7aa",
   },
@@ -334,6 +357,7 @@ export const works: Work[] = [
       { workId: "rogue_one", relation: "ローグ・ワンの直後" },
       { workId: "ep5", relation: "直接続く" },
     ],
+    minutesPerEpisode: 121,
     spineColor: "#374151",
     labelColor: "#fbbf24",
   },
@@ -355,6 +379,7 @@ export const works: Work[] = [
       { workId: "ep4", relation: "EP4の3年後" },
       { workId: "ep6", relation: "直接続く" },
     ],
+    minutesPerEpisode: 124,
     spineColor: "#1f2937",
     labelColor: "#f9fafb",
   },
@@ -376,6 +401,7 @@ export const works: Work[] = [
       { workId: "ep5", relation: "EP5の直後" },
       { workId: "mandalorian", relation: "この約5年後がマンダロリアン" },
     ],
+    minutesPerEpisode: 131,
     spineColor: "#1f2937",
     labelColor: "#6ee7b7",
   },
@@ -402,6 +428,10 @@ export const works: Work[] = [
       { workId: "boba_fett", relation: "並行して描かれる（Ch.5-6は本作の続き）" },
       { workId: "ahsoka", relation: "S3後にアソーカへ続く" },
     ],
+    minutesPerEpisode: 40,
+    isEntryPoint: true,
+    essentialForRoutes: ["mandalorian_route"],
+    entryNote: "1話から完結している。SWを全く知らなくても楽しめる。",
     spineColor: "#2d3748",
     labelColor: "#e2e8f0",
   },
@@ -425,6 +455,8 @@ export const works: Work[] = [
       { workId: "mandalorian", relation: "並行して描かれる（Ch.5-6は実質マンダロリアン）" },
       { workId: "ahsoka", relation: "アソーカが登場" },
     ],
+    minutesPerEpisode: 40,
+    essentialForRoutes: ["mandalorian_route"],
     spineColor: "#744210",
     labelColor: "#fefce8",
   },
@@ -448,6 +480,7 @@ export const works: Work[] = [
       { workId: "mandalorian", relation: "マンダロリアンS3の後" },
       { workId: "rebels", relation: "Rebelsのエズラ・ブリッジャーが再登場" },
     ],
+    minutesPerEpisode: 45,
     spineColor: "#1a365d",
     labelColor: "#bee3f8",
   },
@@ -471,6 +504,7 @@ export const works: Work[] = [
       { workId: "ep6", relation: "EP6の30年後" },
       { workId: "ep8", relation: "直接続く" },
     ],
+    minutesPerEpisode: 138,
     spineColor: "#1a1a2e",
     labelColor: "#f9fafb",
   },
@@ -492,6 +526,7 @@ export const works: Work[] = [
       { workId: "ep7", relation: "EP7の直後" },
       { workId: "ep9", relation: "直接続く" },
     ],
+    minutesPerEpisode: 152,
     spineColor: "#1c1c2e",
     labelColor: "#f9fafb",
   },
@@ -512,6 +547,7 @@ export const works: Work[] = [
     connections: [
       { workId: "ep8", relation: "EP8の1年後" },
     ],
+    minutesPerEpisode: 141,
     spineColor: "#0d1117",
     labelColor: "#fbbf24",
   },
