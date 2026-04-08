@@ -187,26 +187,29 @@ function WorkCard({ work, onClick }: { work: Work; onClick: () => void }) {
       }}
     >
       {/* ポスター */}
-      <div className="relative w-12 shrink-0" style={{ aspectRatio: "2/3" }}>
-        <Image src={work.posterUrl} alt={work.titleJa} fill className="object-cover" sizes="48px" />
+      <div className="relative w-20 shrink-0" style={{ aspectRatio: "2/3" }}>
+        <Image src={work.posterUrl} alt={work.titleJa} fill className="object-cover" sizes="80px" />
       </div>
 
-      <div className="flex-1 px-3 py-2.5 min-w-0">
-        <div className="flex items-center gap-1.5 flex-wrap">
+      <div className="flex-1 px-4 py-3 min-w-0">
+        <div className="flex items-center gap-1.5 flex-wrap mb-0.5">
           <span className="font-semibold text-sm" style={{ color: "#1c1917" }}>
             {work.titleJa}
           </span>
-          <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: "#e9e5de", color: "#78716c" }}>
+          <span className="text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: "#e9e5de", color: "#78716c" }}>
             {work.type === "film" ? "映画" : `S${work.seasons}`}
           </span>
           {isEssential && (
-            <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: "#92400e18", color: "#92400e" }}>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: "#92400e18", color: "#92400e" }}>
               ルート必須
             </span>
           )}
         </div>
-        <p className="text-[10px] mt-0.5" style={{ color: "#a8a29e" }}>
+        <p className="text-xs mb-1.5" style={{ color: "#a8a29e" }}>
           {formatTime(work)} · {work.timelineLabel}
+        </p>
+        <p className="text-xs leading-5 line-clamp-2" style={{ color: "#78716c" }}>
+          {work.synopsis}
         </p>
       </div>
 
