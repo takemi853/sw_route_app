@@ -114,6 +114,8 @@
   align-items: start;
 }
 
+.diagnosisPanel > *, .resultGrid > * { min-width: 0; }
+
 .heroCopy { padding-top: 52px; position: sticky; top: 24px; }
 .eyebrow { color: var(--acid); font-size: 10px; font-weight: 900; letter-spacing: .22em; }
 .heroCopy h1, .resultCopy h1, .feedbackPanel h1, .emptyState h1 {
@@ -294,20 +296,24 @@
 .privacyNote { margin-top: 22px; color: #666873; font-size: 10px; }
 
 @media (max-width: 900px) {
-  .diagnosisPanel, .resultGrid { grid-template-columns: 1fr; }
+  .diagnosisPanel, .resultGrid { grid-template-columns: minmax(0, 1fr); }
   .heroCopy { position: static; padding-top: 10px; }
   .posterCard { max-width: 440px; width: 100%; margin: 0 auto; }
 }
 
 @media (max-width: 600px) {
-  .shell { padding-inline: 16px; }
+  .shell { overflow-x: clip; padding: 0 16px 44px; }
   .header { height: 76px; }
+  .brand { min-width: 0; }
+  .brand strong { font-size: 11px; }
+  .brand small { font-size: 8px; letter-spacing: .14em; }
   .prototypeBadge { display: none; }
-  .progress { margin-top: 20px; }
+  .progress { max-width: 100%; margin-top: 20px; }
   .progressItem small { display: none; }
   .diagnosisPanel { margin-top: 24px; }
-  .heroCopy h1 { font-size: 44px; }
+  .heroCopy h1, .resultCopy h1, .feedbackPanel h1, .emptyState h1 { font-size: clamp(36px, 11vw, 44px); overflow-wrap: anywhere; }
   .formCard { padding: 20px 16px; }
+  .choiceGrid button, .interestGrid button, .segmented button { max-width: 100%; }
   .twoColumnFields, .sentimentGrid, .resultActions, .feedbackActions { grid-template-columns: 1fr; }
   .feedbackPanel { padding-top: 10px; }
 }
