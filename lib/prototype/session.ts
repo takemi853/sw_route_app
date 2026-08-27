@@ -70,7 +70,7 @@ export function toRecommendationInput(
   };
 }
 
-export function recommendAfterFeedback(
+export function recommendAlternative(
   input: RecommendationInput,
   current: Recommendation,
   candidates: readonly RecommendationCandidate[],

@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import PrototypeForge from "./PrototypeForge";
 
 export const metadata: Metadata = {
-  title: "次のスター・ウォーズを見つける | Route Forge",
-  description: "視聴歴と好みから、次に見る一つを固定ルールで提案するローカルprototype。",
+  title: "次に見るスター・ウォーズを見つける | STAR PATH",
+  description: "今の気分と使える時間から、次に見るスター・ウォーズの一本・一話と、その先の道筋を案内する非公式ファンガイド。",
 };
 
 export default function PrototypePage() {

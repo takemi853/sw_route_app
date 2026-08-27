@@ -8,7 +8,7 @@ import { recommendNext } from "../lib/recommendation/recommend";
 import {
   diagnosisPresets,
   inferPersona,
-  recommendAfterFeedback,
+  recommendAlternative,
   toRecommendationInput,
 } from "../lib/prototype/session";
 
@@ -30,12 +30,12 @@ test("診断presetを推薦inputへ変換する", () => {
   assert.equal(lapsed.animationAllowed, false);
 });
 
-test("視聴後は現在作品を除外して次の一つへ進む", () => {
+test("提案が今は違う場合は現在候補を除外して別入口へ進む", () => {
   const input = toRecommendationInput(diagnosisPresets.partial_fan);
   const current = recommendNext(input, recommendationCandidates);
 
   assert.ok(current);
-  const next = recommendAfterFeedback(
+  const next = recommendAlternative(
     input,
     current,
     recommendationCandidates,
