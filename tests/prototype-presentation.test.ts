@@ -12,10 +12,23 @@ test("Route Forgeのroot metadataは日本語の体験を説明する", async ()
   assert.match(layout, /lang="ja"/);
 });
 
-test("プロトタイプはモバイルでグリッドの最小幅を残さない", async () => {
+test("プロトタイプは入口選択とその先の道筋を一画面で伝える", async () => {
+  const prototype = await readFile(new URL("app/prototype/PrototypeForge.tsx", root), "utf8");
+
+  assert.match(prototype, /スター・ウォーズ、/);
+  assert.match(prototype, /最初に見る一本・一話だけを案内/);
+  assert.match(prototype, /この先の道筋/);
+  assert.match(prototype, /見てみたい/);
+  assert.match(prototype, /今は違う/);
+  assert.doesNotMatch(prototype, />楽しめた</);
+  assert.doesNotMatch(prototype, />合わなかった</);
+});
+
+test("プロトタイプはPCとモバイルで段階的にレイアウトを切り替える", async () => {
   const styles = await readFile(new URL("app/prototype/prototype.module.css", root), "utf8");
 
-  assert.match(styles, /\.diagnosisPanel > \*, \.resultGrid > \* \{ min-width: 0; \}/);
-  assert.match(styles, /\.diagnosisPanel, \.resultGrid \{ grid-template-columns: minmax\(0, 1fr\); \}/);
-  assert.match(styles, /\.shell \{ overflow-x: clip; padding: 0 16px 44px; \}/);
+  assert.match(styles, /grid-template-columns: minmax\(300px, 0\.78fr\) minmax\(570px, 1\.22fr\)/);
+  assert.match(styles, /@media \(max-width: 1040px\)/);
+  assert.match(styles, /@media \(max-width: 760px\)/);
+  assert.match(styles, /\.resultHero \{\s+grid-template-columns: minmax\(0, 1fr\)/);
 });
